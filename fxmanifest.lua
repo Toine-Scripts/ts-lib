@@ -32,7 +32,7 @@ client_scripts {
 }
 
 server_scripts {
-    
+    'server/sv_version.lua'
 }
 
 escrow_ignore {

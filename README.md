@@ -11,6 +11,12 @@ It is designed to be injected dynamically into any script, keeping your resource
 
 ---
 
+## 📥 Download
+
+**[Download the Latest Version](https://store.toine.me/download/ts-lib)**
+
+---
+
 ## 🚀 Features
 
 - **Automated Framework Detection**: Natively supports `qb-core`, `qbx_core`, `es_extended`, and `standalone`. It prioritizes the most modern framework available automatically or via forced config.

@@ -6,13 +6,13 @@ local function loadFile(path)
         print(('^1[ts-lib] Error: Could not load %s^7'):format(path))
         return
     end
-    
+
     local func, err = load(content, ('@@%s/%s'):format(resourceName, path))
     if not func then
         print(('^1[ts-lib] Error: Syntax error in %s: %s^7'):format(path, err))
         return
     end
-    
+
     local success, result = pcall(func)
     if not success then
         print(('^1[ts-lib] Error: Execution error in %s: %s^7'):format(path, result))
@@ -41,7 +41,7 @@ loadFile('modules/ox_lib/shared.lua')
 
 if IsDuplicityVersion() then -- Server side
     loadFile('modules/ox_lib/server.lua')
-else -- Client side
+else                         -- Client side
     loadFile('modules/ox_lib/client.lua')
 end
 
@@ -57,21 +57,21 @@ if not IsDuplicityVersion() then -- Client side
     loadFile('bridge/framework/qbox/client.lua')
     loadFile('bridge/framework/esx/client.lua')
     loadFile('bridge/framework/standalone/client.lua')
-    
+
     loadFile('bridge/keys/qb-vehiclekeys/client.lua')
     loadFile('bridge/keys/qs-vehiclekeys/client.lua')
     loadFile('bridge/keys/standalone/client.lua')
 else -- Server side
+    loadFile('server/sv_version.lua')
     loadFile('bridge/framework/detect.lua')
     loadFile('bridge/framework/qb/server.lua')
     loadFile('bridge/framework/qbox/server.lua')
     loadFile('bridge/framework/esx/server.lua')
     loadFile('bridge/framework/standalone/server.lua')
-    
+
     loadFile('bridge/garage/qb-garages/server.lua')
     loadFile('bridge/garage/esx_garage/server.lua')
     loadFile('bridge/garage/vms_garagesv2/server.lua')
     loadFile('bridge/garage/jg-advancedgarages/server.lua')
     loadFile('bridge/garage/standalone/server.lua')
 end
-
