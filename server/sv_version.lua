@@ -119,11 +119,13 @@ end
 -- Export so other resources can call: exports['ts-lib']:CheckUpdate(versionUrl, changelogUrl)
 exports('CheckUpdate', TS.CheckUpdate)
 
--- Auto-check for ts-lib itself on startup
-CreateThread(function()
-    Wait(3000)
-    local url = TS.Config and TS.Config.UpdateCheckURL
-    if url and url ~= '' then
-        TS.CheckUpdate(url, TS.Config.UpdateCheckChangelogURL)
-    end
-end)
+-- Auto-check for ts-lib itself on startup.
+if GetCurrentResourceName() == 'ts-lib' then
+    CreateThread(function()
+        Wait(3000)
+        local url = TS.Config and TS.Config.UpdateCheckURL
+        if url and url ~= '' then
+            TS.CheckUpdate(url, TS.Config.UpdateCheckChangelogURL)
+        end
+    end)
+end
