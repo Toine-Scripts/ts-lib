@@ -84,15 +84,26 @@ TS.CheckUpdate = function(versionUrl, changelogUrl)
             return
         end
 
-        local latestVersion = responseText:match('"version"%s*:%s*"[vV]?([%d%.]+)"')
+        local latestVersion, remoteChangelog
+        local ok, data = pcall(json.decode, responseText)
+
+        if ok and type(data) == 'table' then
+            latestVersion   = data.version
+            remoteChangelog = data.changelog or data.changelogUrl
+        end
+
+        -- Fallback to regex if JSON decode failed or didn't contain 'version'
+        if not latestVersion then
+            latestVersion = responseText:match('"version"%s*:%s*"[vV]?([%d%.]+)"')
                            or responseText:match('^%s*[vV]?([%d%.]+)%s*$')
+        end
 
         if not latestVersion then
             print(('^3[%s] Update check: could not parse version from response.^0'):format(resourceName))
             return
         end
 
-        latestVersion = latestVersion:gsub('%s+', '')
+        latestVersion = tostring(latestVersion):gsub('%s+', '')
 
         if isOutdated(currentVersion, latestVersion) then
             local title = resourceName .. ' — Update Available!'
@@ -100,8 +111,10 @@ TS.CheckUpdate = function(versionUrl, changelogUrl)
                 { 'Current',   currentVersion },
                 { 'Latest',    latestVersion  },
             }
-            if changelogUrl and changelogUrl ~= '' then
-                rows[#rows + 1] = { 'Changelog', changelogUrl }
+
+            local changelog = (changelogUrl and changelogUrl ~= '') and changelogUrl or remoteChangelog
+            if changelog and changelog ~= '' then
+                rows[#rows + 1] = { 'Changelog', changelog }
             end
 
             local boxLines = buildBox(title, rows)
