@@ -1,0 +1,41 @@
+.subtitle-container {
+    position: absolute;
+
+    bottom: -30vh;
+    left: 0;
+
+    width: 100vw;
+    height: calc(30vh * 2 + 3rem);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtitle-container .subtitle-content {
+    bottom: -30vh;
+    left: 0;
+
+    /* On laisse le fit content pour que la ligne s'adapte au texte tapé */
+    width: fit-content;
+    height: 30vh;
+
+    padding-left: 5rem;
+    padding-right: 5rem;
+
+    background: radial-gradient(ellipse closest-side, rgba(21, 21, 21, 1) 0%, rgba(21, 21, 21, 0) 100%);
+    
+    /* On ajoute une transition douce sur la largeur pour que ça bouge avec fluidité pendant l'effet machine à écrire */
+    transition: width 0.1s ease-out, padding 0.3s ease;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subtitle-container .subtitle-content span {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+}

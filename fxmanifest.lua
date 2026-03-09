@@ -3,10 +3,13 @@ game 'gta5'
 lua54 'yes'
 
 name 'ts-lib'
-version '1.0.0'
+version '1.0.1'
 description 'Toine Scripts Library'
 author 'Toine'
 contact 'store.toine.me'
+
+ui_page 'ui/build/index.html'
+--ui_page 'http://localhost:3000'
 
 files {
     'imports.lua',
@@ -15,7 +18,9 @@ files {
     'shared/*.lua',
     'bridge/framework/**/*.lua',
     'bridge/garage/**/*.lua',
-    'bridge/keys/**/*.lua'
+    'bridge/keys/**/*.lua',
+    "ui/build/index.html",
+    "ui/build/assets/*.*",
 }
 
 shared_scripts {
@@ -29,17 +34,15 @@ shared_scripts {
 client_scripts {
     'bridge/framework/detect.lua',
     'bridge/framework/**/client.lua',
+
+    'modules/**/client.lua'
 }
 
 server_scripts {
     'server/sv_version.lua'
 }
 
-escrow_ignore {
-  
-}
-
 dependency {
     'oxmysql', -- You can remove this if you don't use oxmysql
-    'ox_lib' -- You need to keep this if you use certain features of this lib
+    'ox_lib'   -- You need to keep this if you use certain features of this lib
 }

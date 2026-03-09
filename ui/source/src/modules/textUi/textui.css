@@ -1,0 +1,37 @@
+.textUI-container {
+    position: absolute;
+    z-index: 1;
+
+    background-color: var(--background-dark);
+    padding: 1rem 1.1rem;
+    border-radius: 0.5rem;
+
+    border: 1px solid var(--border-color);
+
+    max-width: 20vw;
+    width: fit-content;
+}
+
+.top-left {
+    top: 1.5rem;
+    left: 1.5rem;
+}
+
+.textUI-container .textUI-content {
+    
+}
+
+.textUI-container .textUI-content span {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+}
+
+.textUI-container .textUI-content letter {
+    background-color: var(--background-white);
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.2rem;
+    border: 1px solid var(--border-color);
+    color: black;
+}

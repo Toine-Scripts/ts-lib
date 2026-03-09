@@ -61,6 +61,28 @@ if not IsDuplicityVersion() then -- Client side
     loadFile('bridge/keys/qb-vehiclekeys/client.lua')
     loadFile('bridge/keys/qs-vehiclekeys/client.lua')
     loadFile('bridge/keys/standalone/client.lua')
+
+    if not TS then TS = {} end
+    if not TS.Lib then TS.Lib = {} end
+    TS.Lib.TextUI = {}
+    
+    TS.Lib.TextUI.Show = function(text, position)
+        exports['ts-lib']:SendTextUI(text, position)
+    end
+    
+    TS.Lib.TextUI.Hide = function()
+        exports['ts-lib']:HideTextUI()
+    end
+
+    TS.Lib.Subtitle = {}
+    
+    TS.Lib.Subtitle.Show = function(text)
+        exports['ts-lib']:SendSubtitle(text)
+    end
+    
+    TS.Lib.Subtitle.Hide = function()
+        exports['ts-lib']:HideSubtitle()
+    end
 else -- Server side
     loadFile('server/sv_version.lua')
     loadFile('bridge/framework/detect.lua')

@@ -84,8 +84,8 @@ TS.CheckUpdate = function(versionUrl, changelogUrl)
             return
         end
 
-        local latestVersion = responseText:match('"version"%s*:%s*"([%d%.]+)"')
-                           or responseText:match('^%s*([%d%.]+)%s*$')
+        local latestVersion = responseText:match('"version"%s*:%s*"[vV]?([%d%.]+)"')
+                           or responseText:match('^%s*[vV]?([%d%.]+)%s*$')
 
         if not latestVersion then
             print(('^3[%s] Update check: could not parse version from response.^0'):format(resourceName))
