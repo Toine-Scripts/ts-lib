@@ -1,19 +1,38 @@
 -- ESX specific overrides for server bridge
 if TS.FrameworkName ~= 'es_extended' then return end
 
-TS.Bridge.HasPermission = function(source, permission)
-    -- ESX usually relies on ACE perms or group checks
-    -- Assuming a basic ACE check as per original ts-persistence logic
-    if IsPlayerAceAllowed(source, permission) or IsPlayerAceAllowed(source, "admin") then return true end
-    
-    -- Could add ESX group checking here if needed:
-    -- local xPlayer = TS.FrameworkObject.GetPlayerFromId(source)
-    -- if xPlayer and (xPlayer.getGroup() == 'admin' or xPlayer.getGroup() == 'superadmin') then return true end
+local ESX = TS.FrameworkObject
 
-    return false
+TS.Bridge.HasPermission = function(source, permission)
+    
+
+    local xPlayer = ESX.GetPlayerFromId(source) 
+    if not xPlayer then return false end
+
+    return xPlayer.get(permission) or false
 end
 
 TS.Bridge.GetVehicleType = function(model)
     -- ESX does not have a native shared vehicles table easily accessible for types
-    return 'automobile' 
+    return 'automobile'
 end
+
+TS.Bridge.GetPlayers = function()
+    local sources = {}
+
+    if ESX and ESX.GetPlayers then
+        local players = ESX.GetPlayers()
+        for i = 1, #players do
+            sources[#sources + 1] = players[i]
+        end
+        return sources
+    end
+
+    local players = GetPlayers()
+    for i = 1, #players do
+        sources[#sources + 1] = tonumber(players[i]) or players[i]
+    end
+
+    return sources
+end
+

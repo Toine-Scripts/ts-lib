@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 name 'ts-lib'
-version '1.0.1'
+version '1.0.2'
 description 'Toine Scripts Library'
 author 'Toine'
 contact 'store.toine.me'
@@ -43,6 +43,6 @@ server_scripts {
 }
 
 dependency {
-    'oxmysql', -- You can remove this if you don't use oxmysql
-    'ox_lib'   -- You need to keep this if you use certain features of this lib
+    'oxmysql', 
+    'ox_lib' 
 }

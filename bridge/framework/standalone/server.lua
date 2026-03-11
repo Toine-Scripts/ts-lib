@@ -14,4 +14,13 @@ function TS.Bridge.GetVehicleType(model)
     return 'automobile' -- Default to automobile 
 end
 
+function TS.Bridge.GetPlayers()
+    local players = GetPlayers()
+    for i = 1, #players do
+        players[i] = tonumber(players[i]) or players[i]
+    end
+    return players
+end
+
+
 

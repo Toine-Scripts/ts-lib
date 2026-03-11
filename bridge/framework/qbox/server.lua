@@ -22,4 +22,12 @@ function TS.Bridge.GetVehicleType(model)
     return vehicle.type or 'automobile' -- Default to automobile if not found, this is needed for the vehicle to be created server side
 end
 
+function TS.Bridge.GetPlayers()
+    local players = exports.qbx_core:GetQBPlayers() 
+    local sources = {}
+    for _, player in pairs(players) do
+        sources[#sources + 1] = player.source
+    end
+    return sources
+end
 
