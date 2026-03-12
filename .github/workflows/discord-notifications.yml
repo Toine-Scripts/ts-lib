@@ -38,13 +38,8 @@ jobs:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           embed-title: "🔨 New Commit on ts-lib"
           embed-description: |
-            A new push has been detected in the **ts-lib** repository.
-            
-            **Details:**
-            - **Author:** ${{ github.actor }}
-            - **Branch:** ${{ github.ref_name }}
-            - **Commit Message:** ${{ github.event.head_commit.message }}
-            - **Link:** ${{ github.event.head_commit.url }}
+            [(A new push has been made to the **ts-lib** repository.](${{ github.event.head_commit.url }}))
+            ${{ github.event.head_commit.message }}
             
             **Files Changed:**
             ```
@@ -52,7 +47,7 @@ jobs:
             ```
           embed-color: 3447003 # Soft Blue
           username: "TS-Lib Updates"
-          avatar-url: "https://raw.githubusercontent.com/toine-scripts/resources/ts-lib/master/ui/src/assets/logo.png"
+          avatar-url: "https://store-assets.toine.me/front/avatar/TS.png"
 
   notify-release:
     if: github.event_name == 'release'
@@ -66,14 +61,10 @@ jobs:
           embed-description: |
             A new version of **ts-lib** has been published!
             
-            **Release Details:**
-            - **Tag:** ${{ github.event.release.tag_name }}
-            - **Name:** ${{ github.event.release.name }}
-            - **Author:** ${{ github.actor }}
             - **Changelog:** ${{ github.event.release.html_url }}
           embed-color: 3066993 # Vibrant Green/Cyan
           username: "TS-Lib Releases"
-          avatar-url: "https://raw.githubusercontent.com/toine-scripts/resources/ts-lib/master/ui/src/assets/logo.png"
+          avatar-url: "https://store-assets.toine.me/front/avatar/TS.png"
 
   notify-manual:
     if: github.event_name == 'workflow_dispatch'
@@ -88,4 +79,4 @@ jobs:
             The notification workflow was triggered manually by **${{ github.actor }}**.
           embed-color: 15105570 # Orange
           username: "TS-Lib System"
-          avatar-url: "https://raw.githubusercontent.com/toine-scripts/resources/ts-lib/master/ui/src/assets/logo.png"
+          avatar-url: "https://store-assets.toine.me/front/avatar/TS.png"
