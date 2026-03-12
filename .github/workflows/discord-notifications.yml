@@ -38,8 +38,8 @@ jobs:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           embed-title: "🔨 New Commit on ts-lib"
           embed-description: |
-            [(A new push has been made to the **ts-lib** repository.](${{ github.event.head_commit.url }}))
-            ${{ github.event.head_commit.message }}
+            [A new push has been made to the **ts-lib** repository.](${{ github.event.head_commit.url }})
+            - ${{ github.event.head_commit.message }}
             
             **Files Changed:**
             ```
