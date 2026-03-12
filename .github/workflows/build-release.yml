@@ -1,0 +1,54 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: ui/source/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ui/source
+        run: npm ci
+
+      - name: Build UI
+        working-directory: ui/source
+        run: npm run build
+
+      - name: Create Release Archive
+        run: |
+          zip -r ts-lib.zip \
+            fxmanifest.lua \
+            imports.lua \
+            version.json \
+            lib/ \
+            modules/ \
+            shared/ \
+            server/ \
+            bridge/ \
+            ui/build/
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ts-lib.zip
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
