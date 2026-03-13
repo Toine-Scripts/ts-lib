@@ -49,3 +49,12 @@ if not IsDuplicityVersion() then
         exports['ts-lib']:HideTextUI()
     end
 end
+
+-- Update checker (server only): TS.CheckUpdate(versionUrl, changelogUrl?)
+-- versionUrl must return JSON {"version":"x.y.z"}
+if IsDuplicityVersion() then
+    TS = TS or {}
+    TS.CheckUpdate = function(versionUrl, changelogUrl)
+        exports['ts-lib']:CheckUpdate(versionUrl, changelogUrl)
+    end
+end

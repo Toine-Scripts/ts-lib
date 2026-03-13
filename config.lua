@@ -4,6 +4,9 @@ Config.Garages = 'auto'
 Config.VehicleKeys = 'auto'
 Config.debug = true
 
+Config.UpdateCheckURL = 'https://raw.githubusercontent.com/toine-scripts/ts-lib/main/version.json'
+Config.UpdateCheckChangelogURL = 'https://docs.toine.me/scripts/ts-lib/changelog'
+
 Config.Data = {
     Framework = {
         ['qbcore'] = 'qb-core',

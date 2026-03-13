@@ -30,5 +30,5 @@ client_scripts {
 }
 
 server_scripts {
-
+    'server/update_check.lua',
 }
