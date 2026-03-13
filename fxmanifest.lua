@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 name 'ts-lib'
-version '1.0.1'
+version '1.0.5'
 description 'Toine Scripts Library'
 author 'Toine'
 contact 'store.toine.me'
@@ -12,37 +12,23 @@ ui_page 'ui/build/index.html'
 --ui_page 'http://localhost:3000'
 
 files {
-    'imports.lua',
-    'lib/*.lua',
-    'modules/**/*.lua',
-    'shared/*.lua',
-    'bridge/framework/**/*.lua',
-    'bridge/garage/**/*.lua',
-    'bridge/keys/**/*.lua',
-    "ui/build/index.html",
-    "ui/build/assets/*.*",
+    'import.lua',
+    'shared/bridge/**/init.lua',
+    'shared/bridge/**/**/*.lua',
+    'ui/build/index.html',
+    'ui/build/assets/*.*',
 }
 
 shared_scripts {
-    '@ox_lib/init.lua',
-    'shared/init.lua',
-    'shared/config.lua',
-    'shared/utils.lua',
-    'shared/events.lua'
+    'config.lua',
+    'shared/utils/*.lua',
+    'shared/main_init.lua',
 }
 
 client_scripts {
-    'bridge/framework/detect.lua',
-    'bridge/framework/**/client.lua',
-
-    'modules/**/client.lua'
+    'modules/**/client.lua',
 }
 
 server_scripts {
-    'server/sv_version.lua'
-}
 
-dependency {
-    'oxmysql', -- You can remove this if you don't use oxmysql
-    'ox_lib'   -- You need to keep this if you use certain features of this lib
 }

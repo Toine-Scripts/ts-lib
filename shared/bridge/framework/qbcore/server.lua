@@ -1,0 +1,91 @@
+QBCore = exports['qb-core']:GetCoreObject()
+
+Bridge.Framework.Server.Functions.GetPlayerJob = function(source)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if not Player then
+        return false, 'Player not found, please check if the player is loaded'
+    end
+
+    local jobData = {
+        name = Player.PlayerData.job.name,
+        label = Player.PlayerData.job.label,
+        onduty = Player.PlayerData.job.onduty,
+        type = Player.PlayerData.job.type,
+        grade = Player.PlayerData.job.grade,
+        grade_name = Player.PlayerData.job.grade.name,
+        grade_label = Player.PlayerData.job.grade.label,
+        grade_salary = Player.PlayerData.job.grade.salary,
+    }
+
+    return true, jobData
+end
+
+Bridge.Framework.Server.Functions.GetPlayersByJobName = function(job, checkOnDuty) 
+    if not job then
+        return false, 'Job not found, please check if the job is valid or not provided'
+    end
+    if checkOnDuty == nil then checkOnDuty = false end
+
+    local players, count = QBCore.Functions.GetPlayersByJob(job, checkOnDuty)
+    if not players then
+        return false, 'No players found in job: ' .. job .. ' (checkOnDuty: ' .. checkOnDuty .. ')'
+    end
+
+    local playerData = {}
+    for _, playerId in ipairs(players) do
+        local Player = QBCore.Functions.GetPlayer(playerId)
+        if Player and Player.PlayerData and Player.PlayerData.job then
+            playerData[#playerData + 1] = {
+                id = playerId,
+                job = {
+                    name = Player.PlayerData.job.name,
+                    label = Player.PlayerData.job.label,
+                    onduty = Player.PlayerData.job.onduty,
+                    type = Player.PlayerData.job.type,
+                    grade = Player.PlayerData.job.grade,
+                    grade_name = Player.PlayerData.job.grade.name,
+                    grade_label = Player.PlayerData.job.grade.label,
+                    grade_salary = Player.PlayerData.job.grade.salary,
+                }
+            }
+        end
+    end
+    return true, playerData
+end
+
+Bridge.Framework.Server.Functions.GetPlayers = function()
+    local players = QBCore.Functions.GetPlayers()
+    if not players then
+        return false, 'No players found'
+    end
+    return true, players
+end
+
+RegisterNetEvent('QBCore:Server:PlayerLoaded')
+AddEventHandler('QBCore:Server:PlayerLoaded', function(source)
+    Utils.DebugPrint('Player loaded: ' .. source)
+    TriggerEvent('ts-lib:server:onPlayerLoaded', source)
+
+    Bridge.Framework.Server.Emit('onPlayerLoaded', source)
+end)
+
+RegisterNetEvent('QBCore:Server:OnPlayerUnload')
+AddEventHandler('QBCore:Server:OnPlayerUnload', function()
+    Utils.DebugPrint('Player unloaded: ' .. source)
+    TriggerEvent('ts-lib:server:onPlayerUnloaded')
+
+    Bridge.Framework.Server.Emit('onPlayerUnloaded')
+end)
+
+RegisterNetEvent('QBCore:Server:OnJobUpdate')
+AddEventHandler('QBCore:Server:OnJobUpdate', function(job)
+    Utils.DebugPrint('Job updated: ' .. job)
+    TriggerEvent('ts-lib:server:onJobUpdated', job)
+
+    Bridge.Framework.Server.Emit('onJobUpdated', job)
+end)
+
+
+Bridge.Framework.Server.Functions.GetVehicleType = function(model)
+    return QBCore.Shared.Vehicles[model] and QBCore.Shared.Vehicles[model].type or 'automobile'
+end
