@@ -62,7 +62,8 @@ Bridge.Framework.Server.Functions.GetPlayers = function()
 end
 
 RegisterNetEvent('QBCore:Server:PlayerLoaded')
-AddEventHandler('QBCore:Server:PlayerLoaded', function(source)
+AddEventHandler('QBCore:Server:PlayerLoaded', function()
+    local source = source
     Utils.DebugPrint('Player loaded: ' .. source)
     TriggerEvent('ts-lib:server:onPlayerLoaded', source)
 
@@ -71,6 +72,7 @@ end)
 
 RegisterNetEvent('QBCore:Server:OnPlayerUnload')
 AddEventHandler('QBCore:Server:OnPlayerUnload', function()
+    local source = source
     Utils.DebugPrint('Player unloaded: ' .. source)
     TriggerEvent('ts-lib:server:onPlayerUnloaded')
 
@@ -79,13 +81,37 @@ end)
 
 RegisterNetEvent('QBCore:Server:OnJobUpdate')
 AddEventHandler('QBCore:Server:OnJobUpdate', function(job)
-    Utils.DebugPrint('Job updated: ' .. job)
-    TriggerEvent('ts-lib:server:onJobUpdated', job)
+    local source = source
+    Utils.DebugPrint('Job updated: ' .. source .. ' ' .. job)
+    TriggerEvent('ts-lib:server:onJobUpdated', source, job)
 
-    Bridge.Framework.Server.Emit('onJobUpdated', job)
+    Bridge.Framework.Server.Emit('onJobUpdated', source, job)
 end)
 
 
 Bridge.Framework.Server.Functions.GetVehicleType = function(model)
     return QBCore.Shared.Vehicles[model] and QBCore.Shared.Vehicles[model].type or 'automobile'
+end
+
+
+Bridge.Framework.Server.Functions.GetCharId = function(source)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if not Player then
+        return false, 'Player not found, please check if the player is loaded'
+    end
+    return Player.PlayerData.citizenid
+end
+
+Bridge.Framework.Server.Functions.GetSourceByCharId = function(charId)
+    local players = QBCore.Functions.GetPlayers()
+    if not players then
+        return false, 'No players found'
+    end
+    for _, player in ipairs(players) do
+        local Player = QBCore.Functions.GetPlayer(player)
+        if Player and Player.PlayerData and Player.PlayerData.citizenid == charId then
+            return player
+        end
+    end
+    return false, 'Player not found'
 end

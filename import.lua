@@ -16,6 +16,7 @@ local files = {
     'shared/utils/print.lua',
     'shared/utils/ressourceStates.lua',
     'shared/utils/intervals.lua',
+    'shared/utils/table.lua',
     'shared/main_init.lua',
 }
 
@@ -25,7 +26,6 @@ end
 
 TS_LIB_CONFIG = TS_LIB_CONFIG or Config
 
--- UI helpers proxy
 if not IsDuplicityVersion() then
     TS = TS or {}
     TS.Lib = TS.Lib or {}
@@ -50,8 +50,6 @@ if not IsDuplicityVersion() then
     end
 end
 
--- Update checker (server only): TS.CheckUpdate(versionUrl, changelogUrl?)
--- versionUrl must return JSON {"version":"x.y.z"}
 if IsDuplicityVersion() then
     TS = TS or {}
     TS.CheckUpdate = function(versionUrl, changelogUrl)

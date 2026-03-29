@@ -5,6 +5,7 @@ local modules = {
     'framework',
     'garages',
     'vehiclekeys',
+    'notify',
 }
 
 Utils.Print('Initializing modules... (' .. #modules .. ' modules)')

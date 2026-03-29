@@ -10,6 +10,15 @@ export const useGlobalStore = defineStore("app", {
     subtitle: {
       isVisible: false,
       text: "Text Here",
-    }
+    },
+    textInput: {
+      isVisible: false,
+      title: null,
+      placeholder: null,
+      type: "text",
+      value: "",
+      submitEndpoint: "textInput/submit",
+      cancelEndpoint: "textInput/cancel",
+    },
   }),
 });

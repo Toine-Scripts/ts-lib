@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 name 'ts-lib'
-version '1.0.5'
+version '1.0.6'
 description 'Toine Scripts Library'
 author 'Toine'
 contact 'store.toine.me'
@@ -17,6 +17,9 @@ files {
     'shared/bridge/**/**/*.lua',
     'ui/build/index.html',
     'ui/build/assets/*.*',
+    'ui/build/assets/**/*.*',
+    'ui/build/icons/*.*',
+    'ui/build/icons/**/*.*',
 }
 
 shared_scripts {

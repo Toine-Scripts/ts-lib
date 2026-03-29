@@ -1,0 +1,108 @@
+.textInput-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-overlay);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textInput-container .textInput-input-container {
+    width: 40rem;
+    height: 10rem;
+    background-color: var(--background-input-container);
+
+    outline: .1vh solid hsla(0, 0%, 100%, .12);
+    outline-offset: -.1vh;
+
+    border-radius: .5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    
+    gap: 0.5rem;
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-title {
+    width: 100%;
+
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+    line-height: 1.8rem;
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-input {
+    width: 100%;
+    height: fit-content;
+
+    background-color: #151515;
+    color: white;
+    padding: 0.7rem 0.5rem;
+    border-radius: 0.5rem;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.8rem;
+    border: none;
+    outline: none;
+    transition: all .3s cubic-bezier(.46, .43, .1, .99);
+
+    outline: .1vh solid hsla(0, 0%, 100%, 0);
+    outline-offset: -.1vh;
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-input:focus {
+    outline: .1vh solid hsla(0, 0%, 100%, .12);
+    outline-offset: -.1vh;
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-actions .textInput-input-container-action-button {
+    outline: .1vh solid hsla(0, 0%, 100%, .12);
+    outline-offset: -.1vh;
+
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.46, .43, .1, .99);
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-actions .textInput-input-container-action-button span {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    color: white;
+    line-height: 1.8rem;
+    transition: all .3s cubic-bezier(.46, .43, .1, .99);
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-actions .textInput-input-container-action-button.primary {
+    background-color: #811B1B;
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-actions .textInput-input-container-action-button.primary:hover {
+    background: #661616;
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-actions .textInput-input-container-action-button.secondary {
+    background-color: #1E1E1E;
+}
+
+.textInput-container .textInput-input-container .textInput-input-container-actions .textInput-input-container-action-button.secondary:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -1,8 +1,7 @@
 :root {
     --background-dark: #151515;
     --background-white: #ffffff;
-    
-    
-
+    --background-overlay: rgba(0, 0, 0, 0.3);
+    --background-input-container: rgb(30, 30, 30, 0.90);
     --border-color: hsla(0, 0%, 100%, .1);
 }

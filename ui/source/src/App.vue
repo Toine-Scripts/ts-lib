@@ -2,6 +2,7 @@
    <v-app>
       <TextUI />
       <subtitle />
+      <TextInput />
    </v-app>
 </template>
 <script setup>
@@ -9,6 +10,7 @@ import { ref, shallowRef, onMounted, onUnmounted } from "vue";
 import { useGlobalStore } from "./stores/global";
 import TextUI from "./modules/textUi/textui.vue";
 import subtitle from "./modules/subtitle/subtitle.vue";
+import TextInput from "./modules/textInput/textInput.vue";
 const globalStore = useGlobalStore();
 
 const handlers = {
@@ -28,7 +30,15 @@ const handlers = {
       } else {
          globalStore.$state.subtitle.isVisible = false;
       }
-   }
+   },
+
+   textInput: (itemData) => {
+      globalStore.$state.textInput.isVisible = true;
+      globalStore.$state.textInput.title = itemData.data.title;
+      globalStore.$state.textInput.placeholder = itemData.data.placeholder;
+      globalStore.$state.textInput.value = itemData.data.value;
+      globalStore.$state.textInput.type = itemData.data.type;
+   },
 };
 
 const handleMessageListener = (event) => {

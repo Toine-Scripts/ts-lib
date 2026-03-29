@@ -31,3 +31,15 @@ end
 Bridge.Framework.Client.Functions.Notify = function(message, type)
     QBCore.Functions.Notify(message, type)
 end
+
+Bridge.Framework.Client.Functions.GetPlayerData = function()
+    return QBCore.Functions.GetPlayerData()
+end
+
+Bridge.Framework.Client.Functions.GetCharId = function()
+    if not Bridge.Framework.Client.PlayerData.charinfo then
+        Bridge.Framework.Client.PlayerData = QBCore.Functions.GetPlayerData()
+    end
+
+    return Bridge.Framework.Client.PlayerData.citizenid
+end
