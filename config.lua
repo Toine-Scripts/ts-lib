@@ -27,6 +27,7 @@ Config.Data = {
     VehicleKeys = {
         ['qb-vehiclekeys'] = 'qb-vehiclekeys',
         ['qs-vehiclekeys'] = 'qs-vehiclekeys',
+        ['lfKeys'] = 'lfKeys',
         ['standalone'] = 'standalone',
     },
     Notify = {

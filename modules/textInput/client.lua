@@ -10,7 +10,9 @@ local inputData = {
 local zUI = nil
 
 if Config.zUIFix then
-    zUI = exports["zUI-v2"]:getObject()
+    if Utils.IsResourceStarted("zUI-v2") then
+        zUI = exports["zUI-v2"]:getObject()
+    end
 end
 
 TS.Lib.TextInput = {}

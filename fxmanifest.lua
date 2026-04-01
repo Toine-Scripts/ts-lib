@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 name 'ts-lib'
-version '1.0.7'
+version '1.0.8'
 description 'Toine Scripts Library'
 author 'Toine'
 contact 'store.toine.me'
