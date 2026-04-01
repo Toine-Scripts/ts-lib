@@ -46,6 +46,10 @@ Bridge.Notify.Load = function(notifySystem)
         if not Utils.LoadFile(string.format('shared/bridge/notify/%s/client.lua', notifySystem)) then
             return false, 'Failed to load notify client: ' .. notifySystem .. ' (client.lua), please check if the file exists'
         end
+    else
+        if not Utils.LoadFile(string.format('shared/bridge/notify/%s/server.lua', notifySystem)) then
+            return false, 'Failed to load notify server: ' .. notifySystem .. ' (server.lua), please check if the file exists'
+        end
     end
 
     return true, 'Notify system loaded successfully: ' .. notifySystem

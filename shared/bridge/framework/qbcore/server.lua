@@ -61,6 +61,18 @@ Bridge.Framework.Server.Functions.GetPlayers = function()
     return true, players
 end
 
+Bridge.Framework.Server.Functions.HasPermission = function(source, permission)
+    if not source then return false end
+    permission = permission or 'admin'
+
+    if QBCore and QBCore.Functions and QBCore.Functions.HasPermission then
+        return QBCore.Functions.HasPermission(source, permission) == true
+    end
+
+    -- Fallback for older cores / custom stacks using ACE groups.
+    return IsPlayerAceAllowed(source, ('group.%s'):format(permission))
+end
+
 RegisterNetEvent('QBCore:Server:PlayerLoaded')
 AddEventHandler('QBCore:Server:PlayerLoaded', function()
     local source = source

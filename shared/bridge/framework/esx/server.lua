@@ -79,6 +79,27 @@ Bridge.Framework.Server.Functions.GetPlayers = function()
     return true, sources
 end
 
+Bridge.Framework.Server.Functions.HasPermission = function(source, permission)
+    if not source then return false end
+    permission = permission or 'admin'
+
+    local xPlayer = ESX.GetPlayerFromId(source)
+    if not xPlayer then return false end
+
+    if xPlayer.hasGroup then
+        return xPlayer.hasGroup(permission) == true
+    end
+
+    local group = xPlayer.getGroup and xPlayer.getGroup() or xPlayer.group
+    if not group then return false end
+
+    if permission == 'admin' then
+        return group == 'admin' or group == 'superadmin'
+    end
+
+    return group == permission
+end
+
 RegisterNetEvent('esx:playerLoaded', function(source, xPlayer)
     TriggerEvent('ts-lib:server:onPlayerLoaded', source)
     Bridge.Framework.Server.Emit('onPlayerLoaded', source)

@@ -14,6 +14,12 @@ Bridge.Framework.Server.Functions.GetPlayers = function()
     return true, players
 end
 
+Bridge.Framework.Server.Functions.HasPermission = function(source, permission)
+    if not source then return false end
+    permission = permission or 'admin'
+    return IsPlayerAceAllowed(source, ('group.%s'):format(permission))
+end
+
 Bridge.Framework.Server.Functions.GetVehicleType = function(model)
     return 'automobile'
 end

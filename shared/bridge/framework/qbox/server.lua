@@ -71,6 +71,15 @@ Bridge.Framework.Server.Functions.GetPlayers = function()
     return true, players
 end
 
+Bridge.Framework.Server.Functions.HasPermission = function(source, permission)
+    if not source then return false end
+    permission = permission or 'admin'
+
+    -- qbx_core moved away from its own permission abstraction.
+    -- Use native ACE groups by default.
+    return IsPlayerAceAllowed(source, ('group.%s'):format(permission))
+end
+
 RegisterNetEvent('QBCore:Server:PlayerLoaded', function(source)
     Utils.DebugPrint('Player loaded: ' .. source)
     TriggerEvent('ts-lib:server:onPlayerLoaded', source)
