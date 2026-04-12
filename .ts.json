@@ -4,7 +4,7 @@
     "name": "ts-lib",
     "description": "Toine Scripts Library",
     "author": "Toine",
-    "version": "1.0.8"
+    "version": "1.0.9"
   },
   "web": {
     "enabled": false,
@@ -14,6 +14,6 @@
   },
   "git": {
     "autoTag": true,
-    "lastRelease": null
+    "lastRelease": "2026-04-12"
   }
 }
