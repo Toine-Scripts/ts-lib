@@ -4,7 +4,7 @@
     "name": "ts-lib",
     "description": "Toine Scripts Library",
     "author": "Toine",
-    "version": "1.0.9"
+    "version": "1.1.0"
   },
   "web": {
     "enabled": false,
