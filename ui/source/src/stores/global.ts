@@ -20,5 +20,14 @@ export const useGlobalStore = defineStore("app", {
       submitEndpoint: "textInput/submit",
       cancelEndpoint: "textInput/cancel",
     },
+    confirmInput: {
+      isVisible: false,
+      title: null,
+      text: null,
+      confirmLabel: null,
+      cancelLabel: null,
+      confirmEndpoint: "confirmInput/submit",
+      cancelEndpoint: "confirmInput/cancel",
+    },
   }),
 });

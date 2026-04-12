@@ -1,0 +1,19 @@
+{
+  "info": {
+    "id": "c8bf7e00-47c8-4634-9088-494475b0402d",
+    "name": "ts-lib",
+    "description": "Toine Scripts Library",
+    "author": "Toine",
+    "version": "1.0.8"
+  },
+  "web": {
+    "enabled": false,
+    "framework": "none",
+    "src": "./web/source",
+    "dist": "./web/build"
+  },
+  "git": {
+    "autoTag": true,
+    "lastRelease": null
+  }
+}

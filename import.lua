@@ -50,6 +50,10 @@ if not IsDuplicityVersion() then
     TS.Lib.TextUI.Hide = function()
         exports['ts-lib']:HideTextUI()
     end
+
+    TS.Lib.TextInput = function(data)
+        return exports['ts-lib']:TextInput(data)
+    end
 end
 
 if IsDuplicityVersion() then

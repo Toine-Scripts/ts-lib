@@ -1,5 +1,9 @@
+---@type any -- That kind of obvious...
 QBCore = exports['qb-core']:GetCoreObject()
 
+-- Get player job from their source
+---@param source number -- Player source
+---@return boolean, table|string
 Bridge.Framework.Server.Functions.GetPlayerJob = function(source)
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then
@@ -20,6 +24,10 @@ Bridge.Framework.Server.Functions.GetPlayerJob = function(source)
     return true, jobData
 end
 
+-- Get all players by job name
+---@param job string -- Need to rename this args by the way, because it's not a "job", it's a job name (a string).
+---@param checkOnDuty boolean
+---@return boolean, number[]|string
 Bridge.Framework.Server.Functions.GetPlayersByJobName = function(job, checkOnDuty) 
     if not job then
         return false, 'Job not found, please check if the job is valid or not provided'
@@ -53,6 +61,8 @@ Bridge.Framework.Server.Functions.GetPlayersByJobName = function(job, checkOnDut
     return true, playerData
 end
 
+-- Get all players
+---@return boolean, table|string
 Bridge.Framework.Server.Functions.GetPlayers = function()
     local players = QBCore.Functions.GetPlayers()
     if not players then
@@ -61,6 +71,10 @@ Bridge.Framework.Server.Functions.GetPlayers = function()
     return true, players
 end
 
+-- Check if the player has a permission
+---@param source number
+---@param permission string
+---@return boolean
 Bridge.Framework.Server.Functions.HasPermission = function(source, permission)
     if not source then return false end
     permission = permission or 'admin'
@@ -74,8 +88,9 @@ Bridge.Framework.Server.Functions.HasPermission = function(source, permission)
 end
 
 RegisterNetEvent('QBCore:Server:PlayerLoaded')
-AddEventHandler('QBCore:Server:PlayerLoaded', function()
-    local source = source
+AddEventHandler('QBCore:Server:PlayerLoaded', function(Player)
+    local source = Player.PlayerData.source
+    if not source then return end
     Utils.DebugPrint('Player loaded: ' .. source)
     TriggerEvent('ts-lib:server:onPlayerLoaded', source)
 
@@ -83,12 +98,12 @@ AddEventHandler('QBCore:Server:PlayerLoaded', function()
 end)
 
 RegisterNetEvent('QBCore:Server:OnPlayerUnload')
-AddEventHandler('QBCore:Server:OnPlayerUnload', function()
-    local source = source
+AddEventHandler('QBCore:Server:OnPlayerUnload', function(source)
+    if not source then return end
     Utils.DebugPrint('Player unloaded: ' .. source)
-    TriggerEvent('ts-lib:server:onPlayerUnloaded')
+    TriggerEvent('ts-lib:server:onPlayerUnloaded', source)
 
-    Bridge.Framework.Server.Emit('onPlayerUnloaded')
+    Bridge.Framework.Server.Emit('onPlayerUnloaded', source)
 end)
 
 RegisterNetEvent('QBCore:Server:OnJobUpdate')
@@ -100,30 +115,41 @@ AddEventHandler('QBCore:Server:OnJobUpdate', function(job)
     Bridge.Framework.Server.Emit('onJobUpdated', source, job)
 end)
 
-
+-- Get vehicle type from model
+---@param model number
+---@return string
 Bridge.Framework.Server.Functions.GetVehicleType = function(model)
     return QBCore.Shared.Vehicles[model] and QBCore.Shared.Vehicles[model].type or 'automobile'
 end
 
-
+-- Get character id from player source (citizenId etc...)
+---@param source number
+---@return boolean, string|string
 Bridge.Framework.Server.Functions.GetCharId = function(source)
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then
         return false, 'Player not found, please check if the player is loaded'
     end
-    return Player.PlayerData.citizenid
+    return true, Player.PlayerData.citizenid
 end
 
+-- Get player source by character id (citizenId etc...)
+---@param charId string
+---@return boolean, number|string
 Bridge.Framework.Server.Functions.GetSourceByCharId = function(charId)
-    local players = QBCore.Functions.GetPlayers()
-    if not players then
-        return false, 'No players found'
+    if charId == nil or charId == '' then
+        return false, 'Invalid character id'
     end
-    for _, player in ipairs(players) do
-        local Player = QBCore.Functions.GetPlayer(player)
-        if Player and Player.PlayerData and Player.PlayerData.citizenid == charId then
-            return player
-        end
+    if type(charId) ~= 'string' then
+        charId = tostring(charId)
     end
-    return false, 'Player not found'
+    local Player = QBCore.Functions.GetPlayerByCitizenId(charId)
+    if not Player or not Player.PlayerData then
+        return false, 'Player not found with character id: ' .. charId
+    end
+    local src = Player.PlayerData.source
+    if not src then
+        return false, 'Player not found with character id: ' .. charId
+    end
+    return true, src
 end

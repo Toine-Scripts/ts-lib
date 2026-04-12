@@ -3,6 +3,7 @@
       <TextUI />
       <subtitle />
       <TextInput />
+      <ConfirmInput />
    </v-app>
 </template>
 <script setup>
@@ -11,6 +12,7 @@ import { useGlobalStore } from "./stores/global";
 import TextUI from "./modules/textUi/textui.vue";
 import subtitle from "./modules/subtitle/subtitle.vue";
 import TextInput from "./modules/textInput/textInput.vue";
+import ConfirmInput from "./modules/confirminput/confirminput.vue";
 const globalStore = useGlobalStore();
 
 const handlers = {
@@ -31,7 +33,13 @@ const handlers = {
          globalStore.$state.subtitle.isVisible = false;
       }
    },
-
+   confirmInput: (itemData) => {
+      globalStore.$state.confirmInput.isVisible = true;
+      globalStore.$state.confirmInput.title = itemData.data.title;
+      globalStore.$state.confirmInput.text = itemData.data.text;
+      globalStore.$state.confirmInput.confirmLabel = itemData.data.confirmLabel;
+      globalStore.$state.confirmInput.cancelLabel = itemData.data.cancelLabel;
+   },
    textInput: (itemData) => {
       globalStore.$state.textInput.isVisible = true;
       globalStore.$state.textInput.title = itemData.data.title;

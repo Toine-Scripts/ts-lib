@@ -18,3 +18,8 @@ Bridge.Garages.Server.Functions.IsVehicleOwned = function(plate, netId)
     local owner = MySQL.scalar.await('SELECT citizenid FROM player_vehicles WHERE plate = ? LIMIT 1', { plate })
     return owner ~= nil
 end
+
+Bridge.VehicleKeys.Server.Functions.SetDoorStatus = function(entity, status)
+    -- TODO: Implement this
+    return false
+end

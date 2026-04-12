@@ -100,6 +100,7 @@ watch(
          setTimeout(() => {
             if (inputRef.value) {
                inputRef.value.focus();
+               inputRef.value.select();
             }
          }, 0);
       }

@@ -6,7 +6,9 @@ local modules = {
     'garages',
     'vehiclekeys',
     'notify',
+    'target',
 }
+
 
 Utils.Print('Initializing modules... (' .. #modules .. ' modules)')
 
@@ -25,7 +27,7 @@ for _, module in ipairs(modules) do
     if not success then
         Utils.ErrorPrint(('Error loading module %s: %s'):format(module, err))
     else
-        loadedModules += 1
+        loadedModules = loadedModules + 1
     end
 end
 

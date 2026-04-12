@@ -6,6 +6,10 @@ Bridge.Framework.Server.Functions.GetPlayersByJobName = function(job, checkOnDut
     return true, {}
 end
 
+
+---@alias PlayerId number
+---@alias PlayersIdList PlayerId[]
+---@return boolean, PlayersIdList
 Bridge.Framework.Server.Functions.GetPlayers = function()
     local players = GetPlayers()
     for i = 1, #players do

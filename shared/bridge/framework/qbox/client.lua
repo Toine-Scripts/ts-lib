@@ -18,12 +18,15 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
     Bridge.Framework.Client.Emit('onJobUpdated', job)
 end)
 
+-- Get player job 
+---@return boolean, table|string
 Bridge.Framework.Client.Functions.GetPlayerJob = function()
     if not Bridge.Framework.Client.PlayerData.job then
         return false, 'Player job not found, please check if the player is loaded'
     end
     return true, Bridge.Framework.Client.PlayerData.job
 end
+
 
 Bridge.Framework.Client.Functions.Notify = function(message, type)
     QBCore.Functions.Notify(message, type)

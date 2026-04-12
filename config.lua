@@ -3,8 +3,9 @@ Config.Framework = 'auto'
 Config.Garages = 'auto'
 Config.VehicleKeys = 'auto'
 Config.Notify = 'auto'
-Config.debug = true
+Config.Target = 'auto'
 
+Config.debug = true
 Config.zUIFix = true
 
 Config.UpdateCheckURL = 'https://raw.githubusercontent.com/toine-scripts/ts-lib/main/version.json'
@@ -34,6 +35,12 @@ Config.Data = {
         ['qbcore'] = 'qb-core',
         ['esx'] = 'esx_notify',
         -- Add more notify systems here
+    },
+
+    Target = {
+        ['qb-target'] = 'qb-target',
+        ['ox_target'] = 'ox_target',
+        
     },
 }
         

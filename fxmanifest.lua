@@ -3,13 +3,13 @@ game 'gta5'
 lua54 'yes'
 
 name 'ts-lib'
-version '1.0.8'
+version '1.0.9'
 description 'Toine Scripts Library'
 author 'Toine'
 contact 'store.toine.me'
 
-ui_page 'ui/build/index.html'
---ui_page 'http://localhost:3000'
+--ui_page 'ui/build/index.html'
+ui_page 'http://localhost:3000'
 
 files {
     'import.lua',

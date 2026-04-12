@@ -104,3 +104,34 @@ Bridge.Framework.Server.Functions.GetVehicleType = function(model)
     return vehicle.type or 'automobile'
 end
 
+-- Get character id from player source (citizenId etc...)
+---@param source number
+---@return boolean, string|string
+Bridge.Framework.Server.Functions.GetCharId = function(source)
+    local Player = exports.qbx_core:GetPlayer(source)
+    if not Player then
+        return false, 'Player not found, please check if the player is loaded'
+    end
+    return true, Player.PlayerData.citizenId
+end
+
+-- Get player source by character id (citizenId etc...)
+---@param charId string
+---@return boolean, number|string
+Bridge.Framework.Server.Functions.GetSourceByCharId = function(charId)
+    if charId == nil or charId == '' then
+        return false, 'Invalid character id'
+    end
+    if type(charId) ~= 'string' then
+        charId = tostring(charId)
+    end
+    local Player = exports.qbx_core:GetPlayerByCitizenId(charId)
+    if not Player or not Player.PlayerData then
+        return false, 'Player not found with character id: ' .. charId
+    end
+    local src = Player.PlayerData.source or Player.source
+    if not src then
+        return false, 'Player not found with character id: ' .. charId
+    end
+    return true, src
+end
