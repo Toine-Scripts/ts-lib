@@ -35,3 +35,10 @@ Bridge.Framework.Client.Functions.Notify = function(message, type)
     end
 end
 
+Bridge.Framework.Client.Functions.GetPlayerData = function()
+    return ESX.GetPlayerData()
+end
+
+Bridge.Framework.Client.Functions.GetCharId = function()
+    return ESX.PlayerData.identifier
+end

@@ -127,8 +127,8 @@ Bridge.Framework.Server.Functions.GetCharId = function(source)
     if not xPlayer then
         return false, 'Player not found, please check if the player is loaded'
     end
-    -- En ESX, on utilise l'identifier comme équivalent au CitizenID
-    return true, xPlayer.getIdentifier()
+
+    return true, xPlayer.identifier
 end
 
 -- Get player source by character id (identifier)
@@ -143,12 +143,13 @@ Bridge.Framework.Server.Functions.GetSourceByCharId = function(charId)
         charId = tostring(charId)
     end
 
-    -- Utilisation de la méthode native ESX pour récupérer le joueur via son identifier
     local xPlayer = ESX.GetPlayerFromIdentifier(charId)
     
     if not xPlayer then
         return false, 'Player not found with character id: ' .. charId
     end
+
+    print(json.encode(xPlayer, { indent = true }))
 
     local src = xPlayer.source
     if not src then
