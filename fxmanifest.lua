@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 name 'ts-lib'
-version '1.1.1'
+version '1.1.2'
 description 'Toine Scripts Library'
 author 'Toine'
 contact 'store.toine.me'
@@ -35,4 +35,9 @@ client_scripts {
 server_scripts {
     'modules/**/server.lua',
     'server/update_check.lua',
+}
+
+
+exports {
+    'TextInput',
 }

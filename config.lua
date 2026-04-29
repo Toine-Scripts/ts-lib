@@ -6,7 +6,7 @@ Config.Notify = 'auto'
 Config.Target = 'auto'
 
 Config.debug = true
-Config.zUIFix = true
+Config.zUIFix = true -- Not needed anymore, auto detect zUI-v2
 
 Config.UpdateCheckURL = 'https://raw.githubusercontent.com/toine-scripts/ts-lib/main/version.json'
 Config.UpdateCheckChangelogURL = 'https://docs.toine.me/scripts/ts-lib/changelog'

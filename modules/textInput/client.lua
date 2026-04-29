@@ -8,12 +8,11 @@ local inputData = {
 }
 
 local zUI = nil
-
-if Config.zUIFix then
-    if Utils.IsResourceStarted("zUI-v2") then
+AddEventHandler('onResourceStart', function(resourceName)
+    if resourceName == 'zUI-v2' then
         zUI = exports["zUI-v2"]:getObject()
     end
-end
+end)
 
 TS.Lib.TextInput = {}
 
@@ -33,25 +32,32 @@ TS.Lib.TextInput = function(data)
     })
 
     SetNuiFocus(true, true)
+    SetNuiFocusKeepInput(false)
 
     local anyIsOpen = false
 
-    
-    if Config.zUIFix and zUI and zUI.IsAnyMenuOpen then
+    if zUI then
         anyIsOpen = zUI.IsAnyMenuOpen()
-
-        if anyIsOpen and zUI.ManageFocus then
+        if anyIsOpen then
             zUI.ManageFocus(false)
+            SetNuiFocus(true, true)
+            SetNuiFocusKeepInput(false)
         end
     end
 
+    Wait(100)
+
+    SetNuiFocus(true, true)
+    SetNuiFocusKeepInput(false)
+
     while not inputData.receivedData do
-        Wait(100)
+        Wait(0)
     end
 
     SetNuiFocus(false, false)
+    SetNuiFocusKeepInput(false)
 
-    if Config.zUIFix and zUI and zUI.ManageFocus then
+    if zUI and anyIsOpen then
         if anyIsOpen then
             zUI.ManageFocus(true)
         end
